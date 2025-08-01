@@ -29,7 +29,7 @@ kotlin {
 
     sourceSets {
         commonMain.dependencies {
-            //put your multiplatform dependencies here
+            implementation(libs.kotlinx.coroutines.core)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
@@ -37,7 +37,7 @@ kotlin {
 
         //Adicionando depenências específicas para o módulo Android
         androidMain.dependencies {
-            implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.9.2")
+            implementation(libs.androidx.lifecycle.viewmodel.ktx)
         }
 
         //Adicionando dependências específicas para o módulo IOS

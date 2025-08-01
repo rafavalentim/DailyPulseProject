@@ -6,7 +6,7 @@ plugins {
 
 android {
     namespace = "com.rafael.dailypulse.android"
-    compileSdk = 35
+    compileSdk = 36
     defaultConfig {
         applicationId = "com.rafael.dailypulse.android"
         minSdk = 24

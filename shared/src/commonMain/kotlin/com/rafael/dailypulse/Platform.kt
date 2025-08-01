@@ -6,5 +6,5 @@ expect class Platform {
     val deviceModel: String
     val density: String
 
-    fun logSystemInfo()
+   fun logSystemInfo()
 }
