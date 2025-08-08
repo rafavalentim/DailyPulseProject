@@ -5,6 +5,9 @@ pluginManagement {
         gradlePluginPortal()
         mavenCentral()
     }
+    plugins {
+        id("org.jetbrains.kotlin.native.cocoapods") version "2.2.0" // ou a versão do Kotlin que está usando
+    }
 }
 
 dependencyResolutionManagement {

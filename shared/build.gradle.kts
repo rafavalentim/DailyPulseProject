@@ -3,6 +3,8 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidLibrary)
+    id("org.jetbrains.kotlin.native.cocoapods")
+
 }
 
 kotlin {
@@ -24,6 +26,17 @@ kotlin {
         it.binaries.framework {
             baseName = "shared"
             isStatic = true
+        }
+    }
+
+    cocoapods {
+        version = "2.2.0"
+        summary = "Shared module"
+        homepage = "https://yourdomain.com"
+        ios.deploymentTarget = "16.1"
+        framework {
+            baseName = "shared"
+            export(project(":shared")) // ou use explicitamente export das libs
         }
     }
 
