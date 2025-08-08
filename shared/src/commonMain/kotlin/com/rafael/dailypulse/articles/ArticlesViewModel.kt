@@ -23,9 +23,13 @@ class ArticlesViewModel: BaseViewModel() {
     private fun getArticles(){
         scope.launch {
 
-            val fetchedArticles = fetchArticles()
+            delay(2000)
 
-            delay(500)
+            _articlesState.emit(ArticlesState(error = "Something went wrong."))
+
+            delay(2000)
+
+            val fetchedArticles = fetchArticles()
 
             _articlesState.emit(ArticlesState(articles = fetchedArticles))
         }
@@ -39,7 +43,7 @@ class ArticlesViewModel: BaseViewModel() {
             "Mock Market today: Live Updates",
             "Future wew higher in premarket tradind as Wall Street tried to regain its footing",
             "2023-11-09",
-            "https://images.pexels.com/photos/1737957/pexels-photo-1737957.jpeg"
+            "https://picsum.photos/400/300"
 
         ),
         Article(
