@@ -44,6 +44,10 @@ kotlin {
     sourceSets {
         commonMain.dependencies {
             implementation(libs.kotlinx.coroutines.core)
+            implementation(libs.ktor.client.core)
+            implementation(libs.ktor.client.content.negotiation)
+            implementation(libs.ktor.serialization.kotlinx.json)
+            implementation(libs.kotlinx.datetime)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
@@ -52,10 +56,13 @@ kotlin {
         //Adicionando depenências específicas para o módulo Android
         androidMain.dependencies {
             implementation(libs.androidx.lifecycle.viewmodel.ktx)
+            implementation(libs.ktor.client.android)
         }
 
         //Adicionando dependências específicas para o módulo IOS
-        iosMain.dependencies {  }
+        iosMain.dependencies {
+            implementation(libs.ktor.client.darwin)
+        }
 
 
     }
