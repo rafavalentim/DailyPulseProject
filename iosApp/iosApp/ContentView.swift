@@ -2,10 +2,28 @@ import SwiftUI
 import shared
 
 struct ContentView: View {
+
+	@State private var shouldOpenAbout = false
     
 	var body: some View {
-        //AboutScreen()
-        ArticlesScreen(viewModel: .init()) //instanciando o viewModel dentro do ArticlesScreen.
+
+		NavigationStack{
+
+			//instanciando o viewModel dentro do ArticlesScreen.
+			ArticlesScreen(viewModel: .init())
+				.toolbar{
+					ToolbarItem{
+						Button{
+							shouldOpenAbout = true
+						}label: {
+							Label("About", systemImage: "info.circle").labelStyle(.titleAndIcon)
+						}
+						.popover(isPresented: $shouldOpenAbout){
+							AboutScreen()
+						}
+					}
+				}
+		}
 	}
 }
 
