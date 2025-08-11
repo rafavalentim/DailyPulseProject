@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidLibrary)
     id("org.jetbrains.kotlin.native.cocoapods")
+    id("co.touchlab.skie") version "0.10.5" //plugin para o skie - fazer o ios integrar com o viewmodel do android
 
 }
 
