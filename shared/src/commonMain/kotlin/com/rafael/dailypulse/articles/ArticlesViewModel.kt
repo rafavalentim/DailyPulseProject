@@ -1,10 +1,14 @@
 package com.rafael.dailypulse.articles
 
 import com.rafael.dailypulse.BaseViewModel
+import io.ktor.client.HttpClient
+import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
+import io.ktor.serialization.kotlinx.json.json
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import kotlinx.serialization.json.Json
 
 class ArticlesViewModel: BaseViewModel() {
 
@@ -12,9 +16,29 @@ class ArticlesViewModel: BaseViewModel() {
 
     val articlesState: StateFlow<ArticlesState> get() = _articlesState
 
+    //instanciando o use case para buscar os articles da api.
+    val useCase: ArticlesUseCase
+
 
     // Esse bloco de código sempre é executado ao inicializar a classe (Geralmente é a IU que inicializa a viewModel).
     init {
+
+        //Instanciando o kto http client
+        val httpClient = HttpClient{
+            install(ContentNegotiation){
+                json(Json {
+                    prettyPrint = true
+                    isLenient = true
+                    ignoreUnknownKeys = true
+                })
+            }
+        }
+
+        //Instantiating the service class
+        val service = ArticlesService(httpClient)
+
+        //Instatiating the use case
+        useCase = ArticlesUseCase(service)
 
         getArticles()
 
@@ -23,44 +47,60 @@ class ArticlesViewModel: BaseViewModel() {
     private fun getArticles(){
         scope.launch {
 
-            delay(2000)
+//            delay(2000)
+//
+//            _articlesState.emit(ArticlesState(error = "Something went wrong."))
+//
+//            delay(2000)
 
-            _articlesState.emit(ArticlesState(error = "Something went wrong."))
+            //val fetchedArticles = fetchArticles()
 
-            delay(2000)
+            try {
 
-            val fetchedArticles = fetchArticles()
+                val fetchedArticles = useCase.getArticles()
+                _articlesState.emit(ArticlesState(articles = fetchedArticles))
 
-            _articlesState.emit(ArticlesState(articles = fetchedArticles))
+            } catch (e: Exception) {
+
+                val strErro = e.message
+
+                //android.util.Log.e("erroGetArticles", "getArticles: $e.message", )
+
+            }
+
+
+
+
+
         }
     }
 
     //Teste para simular o retorno de uma api com os artigos:
-    suspend fun fetchArticles(): List<Article> = mockArticles
-
-    private val mockArticles = listOf(
-        Article(
-            "Mock Market today: Live Updates",
-            "Future wew higher in premarket tradind as Wall Street tried to regain its footing",
-            "2023-11-09",
-            "https://picsum.photos/400/300"
-
-        ),
-        Article(
-            "Best Iphone deals (2023)",
-            "Apple's smartphones rarelu go on sale",
-            "2023-11-09",
-            "https://images.pexels.com/photos/13367286/pexels-photo-13367286.jpeg"
-
-        ),
-        Article(
-            "Samsung detais",
-            "New blos post, samsung previewed what it calls a new era of galaxy AI",
-            "2023-11-09",
-            "https://images.pexels.com/photos/2402705/pexels-photo-2402705.jpeg"
-
-        )
-    )
+//    suspend fun fetchArticles(): List<Article> = mockArticles
+//
+//    private val mockArticles = listOf(
+//        Article(
+//            "Mock Market today: Live Updates",
+//            "Future wew higher in premarket tradind as Wall Street tried to regain its footing",
+//            "2023-11-09",
+//            "https://picsum.photos/400/300"
+//
+//        ),
+//        Article(
+//            "Best Iphone deals (2023)",
+//            "Apple's smartphones rarelu go on sale",
+//            "2023-11-09",
+//            "https://images.pexels.com/photos/13367286/pexels-photo-13367286.jpeg"
+//
+//        ),
+//        Article(
+//            "Samsung detais",
+//            "New blos post, samsung previewed what it calls a new era of galaxy AI",
+//            "2023-11-09",
+//            "https://images.pexels.com/photos/2402705/pexels-photo-2402705.jpeg"
+//
+//        )
+//    )
 
 
 }

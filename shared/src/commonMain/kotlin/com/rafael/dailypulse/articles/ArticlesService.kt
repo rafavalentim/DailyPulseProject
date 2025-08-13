@@ -11,7 +11,7 @@ class ArticlesService(private val httpClient: HttpClient) {
     private val apiKey = "85a2ff51c7d64fe08cbf5449e8f1b73b"
 
     suspend fun fetchArticles(): List<ArticlesRaw>{
-        val response : ArticlesResponse = httpClient.get("https://newapi.org/v2/top-headlines?country=$country&category=$category&apiKey=$apiKey").body()
+        val response : ArticlesResponse = httpClient.get("https://newsapi.org/v2/top-headlines?country=$country&category=$category&apiKey=$apiKey").body()
 
         return response.articles
     }
