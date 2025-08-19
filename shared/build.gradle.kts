@@ -6,6 +6,7 @@ plugins {
     id("org.jetbrains.kotlin.native.cocoapods")
     id("co.touchlab.skie") version "0.10.5" //plugin para o skie - fazer o ios integrar com o viewmodel do android
     id("org.jetbrains.kotlin.plugin.serialization") version "2.2.0"
+    alias(libs.plugins.sqlDelight)
 
 }
 
@@ -50,6 +51,7 @@ kotlin {
             implementation(libs.ktor.serialization.kotlinx.json)
             implementation(libs.kotlinx.datetime)
             implementation(libs.koin.core)
+            implementation(libs.sql.coroutines.extensions)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
@@ -59,11 +61,13 @@ kotlin {
         androidMain.dependencies {
             implementation(libs.androidx.lifecycle.viewmodel.ktx)
             implementation(libs.ktor.client.android)
+            implementation(libs.sql.android.driver)
         }
 
         //Adicionando dependências específicas para o módulo IOS
         iosMain.dependencies {
             implementation(libs.ktor.client.darwin)
+            implementation(libs.sql.native.driver)
         }
 
 
@@ -79,5 +83,13 @@ android {
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
+    }
+}
+
+sqldelight {
+    databases {
+        create(name = "DailyPulseDatabase") {
+            packageName.set("com.rafael.dailypulse.db")
+        }
     }
 }
