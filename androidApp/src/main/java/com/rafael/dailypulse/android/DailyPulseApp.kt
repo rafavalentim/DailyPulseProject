@@ -1,6 +1,7 @@
 package com.rafael.dailypulse.android
 
 import android.app.Application
+import com.rafael.dailypulse.android.di.databaseModule
 import com.rafael.dailypulse.android.di.viewModelsModule
 import com.rafael.dailypulse.di.sharedKoinModules
 import org.koin.android.ext.koin.androidContext
@@ -17,7 +18,7 @@ class DailyPulseApp: Application() {
 
     //Inicializando o koin no contexto da aplicação.
     private fun initKoin(){
-        val modules = sharedKoinModules + viewModelsModule
+        val modules = sharedKoinModules + viewModelsModule + databaseModule
 
         startKoin {
             androidContext(this@DailyPulseApp)

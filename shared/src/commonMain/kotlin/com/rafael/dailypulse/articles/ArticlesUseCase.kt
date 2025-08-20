@@ -10,10 +10,10 @@ import kotlin.time.ExperimentalTime
 import kotlin.time.Instant
 
 //Classe responsável por mapear oa dados do response nas classes de negócio do sistema.
-class ArticlesUseCase(private val service : ArticlesService) {
+class ArticlesUseCase(private val repo : ArticlesRepository) {
 
     suspend fun getArticles() : List<Article>{
-        val articlesRaw = service.fetchArticles()
+        val articlesRaw = repo.getArticles()
 
         return mapArticles(articlesRaw)
     }
