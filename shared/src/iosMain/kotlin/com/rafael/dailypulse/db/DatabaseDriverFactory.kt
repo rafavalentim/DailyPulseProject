@@ -8,6 +8,6 @@ actual class DatabaseDriverFactory() {
 
     actual fun createDriver(): SqlDriver = NativeSqliteDriver(
         schema = DailyPulseDatabase.Schema,
-        name = "DailyPulseDatabase.db"
+        name = "DailyPulse.Database.db"
     )
 }

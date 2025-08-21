@@ -1,4 +1,5 @@
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
@@ -32,14 +33,25 @@ kotlin {
         }
     }
 
+    // aplica o -lsqlite3 a todos os binários nativos (inclui iOS)
+    targets.withType<KotlinNativeTarget>().configureEach {
+        binaries.all {
+            linkerOpts("-lsqlite3")
+        }
+    }
+
     cocoapods {
         version = "2.2.0"
         summary = "Shared module"
         homepage = "https://yourdomain.com"
         ios.deploymentTarget = "16.1"
+
+        // injeta no .podspec para que o Xcode linke sqlite3 também
+        extraSpecAttributes["libraries"] = "sqlite3"
+
         framework {
             baseName = "shared"
-            export(project(":shared")) // ou use explicitamente export das libs
+            //export(project(":shared")) // ou use explicitamente export das libs
         }
     }
 

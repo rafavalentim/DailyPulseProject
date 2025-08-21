@@ -16,6 +16,7 @@
 		D7B152CB2D97219C00B30624 /* AboutScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B152CA2D97219C00B30624 /* AboutScreen.swift */; };
 		D7DB1E212E4676E9000479A2 /* SharedWithYou.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D748690B2E466F2600B3A16B /* SharedWithYou.framework */; };
 		D7DB1E222E4676E9000479A2 /* SharedWithYouCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D748690D2E4671AB00B3A16B /* SharedWithYouCore.framework */; };
+		D7DBB17A2E574E3200843993 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = D7DBB1792E574E3200843993 /* libsqlite3.tbd */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -45,6 +46,7 @@
 		D77F9DF02E4A2B81005910DE /* ArticlesScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticlesScreen.swift; sourceTree = "<group>"; };
 		D7B152C82D971C6100B30624 /* AboutListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutListView.swift; sourceTree = "<group>"; };
 		D7B152CA2D97219C00B30624 /* AboutScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutScreen.swift; sourceTree = "<group>"; };
+		D7DBB1792E574E3200843993 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,6 +54,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D7DBB17A2E574E3200843993 /* libsqlite3.tbd in Frameworks */,
 				D7DB1E212E4676E9000479A2 /* SharedWithYou.framework in Frameworks */,
 				D7DB1E222E4676E9000479A2 /* SharedWithYouCore.framework in Frameworks */,
 			);
@@ -102,6 +105,7 @@
 		7555FFB0242A642200829871 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D7DBB1792E574E3200843993 /* libsqlite3.tbd */,
 				D748690D2E4671AB00B3A16B /* SharedWithYouCore.framework */,
 				D748690B2E466F2600B3A16B /* SharedWithYou.framework */,
 			);
