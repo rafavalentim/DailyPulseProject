@@ -1,6 +1,7 @@
 package com.rafael.dailypulse.articles
 
 import com.rafael.dailypulse.BaseViewModel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
@@ -20,20 +21,16 @@ class ArticlesViewModel(
         getArticles()
     }
 
-    private fun getArticles(){
+    fun getArticles(forceFetch : Boolean = false){
         scope.launch {
-
-//            delay(2000)
-//
-//            _articlesState.emit(ArticlesState(error = "Something went wrong."))
-//
-//            delay(2000)
-
-            //val fetchedArticles = fetchArticles()
 
             try {
 
-                val fetchedArticles = useCase.getArticles()
+                _articlesState.emit(ArticlesState(loading = true, articles = _articlesState.value.articles))
+
+                //delay(1000)
+
+                val fetchedArticles = useCase.getArticles(forceFetch)
                 _articlesState.emit(ArticlesState(articles = fetchedArticles))
 
             } catch (e: Exception) {

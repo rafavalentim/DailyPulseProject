@@ -12,8 +12,8 @@ import kotlin.time.Instant
 //Classe responsável por mapear oa dados do response nas classes de negócio do sistema.
 class ArticlesUseCase(private val repo : ArticlesRepository) {
 
-    suspend fun getArticles() : List<Article>{
-        val articlesRaw = repo.getArticles()
+    suspend fun getArticles(forceFetch : Boolean) : List<Article>{
+        val articlesRaw = repo.getArticles(forceFetch)
 
         return mapArticles(articlesRaw)
     }

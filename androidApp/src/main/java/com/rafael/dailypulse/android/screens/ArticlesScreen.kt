@@ -21,6 +21,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -31,6 +32,9 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
+import com.google.accompanist.swiperefresh.SwipeRefresh
+import com.google.accompanist.swiperefresh.SwipeRefreshState
+import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 import com.rafael.dailypulse.articles.Article
 import com.rafael.dailypulse.articles.ArticlesViewModel
 import org.koin.androidx.compose.koinViewModel
@@ -46,12 +50,10 @@ fun ArticlesScreen(
     Column {
         AppBar(onAboutButtonClick)
 
-        if (articlesState.value.loading)
-            Loader()
         if (articlesState.value.error != null)
             ErrorMessage(articlesState.value.error!!)
         if (articlesState.value.articles.isNotEmpty())
-            ArticlesListView(articlesViewModel.articlesState.value.articles)
+            ArticlesListView(articlesViewModel)
     }
 }
 
@@ -74,13 +76,25 @@ private fun AppBar(
 }
 
 @Composable
-fun ArticlesListView(articles: List<Article>) {
+fun ArticlesListView(viewModel: ArticlesViewModel) {
 
-    LazyColumn(modifier = Modifier.fillMaxSize()) {
-        items(articles) { article ->
-            ArticleItemView(article = article)
+    // 1) Colete o estado como State para recompor a UI
+    val uiState by viewModel.articlesState.collectAsState()
+
+    // 2) Use a API nova
+    val swipeState = rememberSwipeRefreshState(isRefreshing = uiState.loading)
+
+    SwipeRefresh(
+        state = swipeState ,
+        {
+            viewModel.getArticles(true)}) {
+        LazyColumn(modifier = Modifier.fillMaxSize()) {
+            items(viewModel.articlesState.value.articles) { article ->
+                ArticleItemView(article = article)
+            }
         }
     }
+
 }
 
 @Composable
@@ -116,19 +130,19 @@ fun ArticleItemView(article: Article) {
     }
 }
 
-@Composable
-fun Loader() {
-    Box(
-        modifier = Modifier.fillMaxSize(),
-        contentAlignment = Alignment.Center
-    ) {
-        CircularProgressIndicator(
-            modifier = Modifier.width(64.dp),
-            color = MaterialTheme.colorScheme.surfaceVariant,
-            trackColor = MaterialTheme.colorScheme.secondary,
-        )
-    }
-}
+//@Composable
+//fun Loader() {
+//    Box(
+//        modifier = Modifier.fillMaxSize(),
+//        contentAlignment = Alignment.Center
+//    ) {
+//        CircularProgressIndicator(
+//            modifier = Modifier.width(64.dp),
+//            color = MaterialTheme.colorScheme.surfaceVariant,
+//            trackColor = MaterialTheme.colorScheme.secondary,
+//        )
+//    }
+//}
 
 @Composable
 fun ErrorMessage(message: String) {
