@@ -35,8 +35,8 @@ import coil.compose.AsyncImage
 import com.google.accompanist.swiperefresh.SwipeRefresh
 import com.google.accompanist.swiperefresh.SwipeRefreshState
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
-import com.rafael.dailypulse.articles.Article
-import com.rafael.dailypulse.articles.ArticlesViewModel
+import com.rafael.dailypulse.articles.application.Article
+import com.rafael.dailypulse.articles.presentation.ArticlesViewModel
 import org.koin.androidx.compose.koinViewModel
 
 

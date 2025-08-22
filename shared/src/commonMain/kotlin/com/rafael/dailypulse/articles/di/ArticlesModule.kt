@@ -1,10 +1,10 @@
 package com.rafael.dailypulse.articles.di
 
-import com.rafael.dailypulse.articles.ArticlesDataSource
-import com.rafael.dailypulse.articles.ArticlesRepository
-import com.rafael.dailypulse.articles.ArticlesService
-import com.rafael.dailypulse.articles.ArticlesUseCase
-import com.rafael.dailypulse.articles.ArticlesViewModel
+import com.rafael.dailypulse.articles.data.ArticlesDataSource
+import com.rafael.dailypulse.articles.data.ArticlesRepository
+import com.rafael.dailypulse.articles.data.ArticlesService
+import com.rafael.dailypulse.articles.application.ArticlesUseCase
+import com.rafael.dailypulse.articles.presentation.ArticlesViewModel
 import org.koin.dsl.module
 
 //Creating the injection dependency.

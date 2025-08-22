@@ -1,4 +1,6 @@
-package com.rafael.dailypulse.articles
+package com.rafael.dailypulse.articles.presentation
+
+import com.rafael.dailypulse.articles.application.Article
 
 data class ArticlesState (
 

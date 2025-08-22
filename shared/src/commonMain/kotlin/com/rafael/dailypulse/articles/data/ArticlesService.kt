@@ -1,4 +1,4 @@
-package com.rafael.dailypulse.articles
+package com.rafael.dailypulse.articles.data
 
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body

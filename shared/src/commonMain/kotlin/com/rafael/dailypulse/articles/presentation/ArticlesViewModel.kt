@@ -1,17 +1,20 @@
-package com.rafael.dailypulse.articles
+package com.rafael.dailypulse.articles.presentation
 
 import com.rafael.dailypulse.BaseViewModel
-import kotlinx.coroutines.delay
+import com.rafael.dailypulse.articles.application.ArticlesUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
-
 
 class ArticlesViewModel(
     private val useCase: ArticlesUseCase
 ): BaseViewModel() {
 
-    private val _articlesState: MutableStateFlow<ArticlesState> = MutableStateFlow(ArticlesState(loading = true))
+    private val _articlesState: MutableStateFlow<ArticlesState> = MutableStateFlow(
+        ArticlesState(
+            loading = true
+        )
+    )
 
     val articlesState: StateFlow<ArticlesState> get() = _articlesState
 
@@ -26,7 +29,12 @@ class ArticlesViewModel(
 
             try {
 
-                _articlesState.emit(ArticlesState(loading = true, articles = _articlesState.value.articles))
+                _articlesState.emit(
+                    ArticlesState(
+                        loading = true,
+                        articles = _articlesState.value.articles
+                    )
+                )
 
                 //delay(1000)
 

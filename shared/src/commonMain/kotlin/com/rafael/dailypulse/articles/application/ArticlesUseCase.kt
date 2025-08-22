@@ -1,5 +1,7 @@
-package com.rafael.dailypulse.articles
+package com.rafael.dailypulse.articles.application
 
+import com.rafael.dailypulse.articles.data.ArticlesRaw
+import com.rafael.dailypulse.articles.data.ArticlesRepository
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.daysUntil
 import kotlinx.datetime.toLocalDateTime
@@ -23,15 +25,16 @@ class ArticlesUseCase(private val repo : ArticlesRepository) {
             raw.title,
             raw.desc ?: "Click to find out more",
             getDaysAgoString(raw.date),
-            raw.imageUrl ?:"https://images.unsplash.com/photo-1609743522653-52354461eb27?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+            raw.imageUrl
+                ?: "https://images.unsplash.com/photo-1609743522653-52354461eb27?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
         )
     }
 
     @OptIn(ExperimentalTime::class)
     private fun getDaysAgoString(date : String): String {
-        val today = Clock.System.todayIn(TimeZone.currentSystemDefault())
+        val today = Clock.System.todayIn(TimeZone.Companion.currentSystemDefault())
         val days = today.daysUntil(
-            Instant.parse(date).toLocalDateTime(TimeZone.currentSystemDefault()).date
+            Instant.Companion.parse(date).toLocalDateTime(TimeZone.Companion.currentSystemDefault()).date
         )
 
         val result = when {

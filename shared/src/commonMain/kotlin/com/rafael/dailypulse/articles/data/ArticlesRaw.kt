@@ -1,4 +1,4 @@
-package com.rafael.dailypulse.articles
+package com.rafael.dailypulse.articles.data
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable

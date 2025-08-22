@@ -1,6 +1,6 @@
 package com.rafael.dailypulse.android.di
 
-import com.rafael.dailypulse.articles.ArticlesViewModel
+import com.rafael.dailypulse.articles.presentation.ArticlesViewModel
 import org.koin.core.module.dsl.viewModel
 import org.koin.dsl.module
 
