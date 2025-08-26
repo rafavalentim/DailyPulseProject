@@ -3,19 +3,17 @@ package com.rafael.dailypulse.android
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.activity.viewModels
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.*
 import androidx.compose.ui.Modifier
 import com.rafael.dailypulse.Platform
-import com.rafael.dailypulse.articles.presentation.ArticlesViewModel
-import com.rafael.dailypulse.ui.App
+import com.rafael.dailypulse.ui.screens.AboutScreen
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        Platform().logSystemInfo()
+        Platform.logSystemInfo()
         //val articlesViewModel : ArticlesViewModel by viewModels()
 
         setContent {
@@ -27,7 +25,7 @@ class MainActivity : ComponentActivity() {
                     //AboutScreen()
                     //ArticlesScreen(articlesViewModel = articlesViewModel)
                     //AppScaffold()
-                    App()
+                    AboutScreen()
                 }
             }
         }

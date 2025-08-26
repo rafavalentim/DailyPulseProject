@@ -1,4 +1,4 @@
-package com.rafael.dailypulse.android.screens
+package com.rafael.dailypulse.ui.screens
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -7,7 +7,6 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -21,12 +20,11 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.rafael.dailypulse.Platform
 
+
 @Composable
-fun AboutScreen(
-    onUpButtonClick: () -> Unit
-) {
+fun AboutScreen() {
     Column {
-        Toolbar(onUpButtonClick)
+        Toolbar()
         ContentView()
     }
 }
@@ -34,12 +32,11 @@ fun AboutScreen(
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun Toolbar(
-    onUpButtonClick: () -> Unit
 ){
     TopAppBar(
         title = { Text(text = "About Device") },
         navigationIcon = {
-            IconButton(onUpButtonClick) {
+            IconButton({}) {
                 Icon(
                     imageVector = Icons.AutoMirrored.Filled.ArrowBack,
                     contentDescription = "Up Button"
@@ -63,8 +60,9 @@ private fun ContentView() {
 }
 
 private fun makeItems(): List<Pair<String, String>>{
-   // val platform = Platform()
-    Platform.logSystemInfo()
+    //val platform = Platform()
+
+
 
     return listOf(
         Pair("Operating System", "${Platform.osName} ${Platform.osVersion}"),

@@ -5,7 +5,7 @@ import android.os.Build
 import android.util.Log
 import kotlin.math.round
 
-actual class Platform(){
+actual object Platform{
 
     actual val osName: String
         get() = "Android"
@@ -26,6 +26,4 @@ actual class Platform(){
         )
 
     }
-
-
 }

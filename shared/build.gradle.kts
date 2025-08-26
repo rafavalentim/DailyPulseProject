@@ -74,6 +74,9 @@ kotlin {
             implementation(compose.runtime)
             implementation(compose.components.resources)
 
+            implementation(compose.materialIconsExtended)
+
+
 
         }
         commonTest.dependencies {
