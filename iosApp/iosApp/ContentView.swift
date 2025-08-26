@@ -2,49 +2,26 @@ import SwiftUI
 import shared
 
 struct ContentView: View {
-
-	@State private var shouldOpenAbout = false
     
-	var body: some View {
-        let articlesScreen = ArticlesScreen(viewModel: .init())
-
-		NavigationStack{
-
-			//instanciando o viewModel dentro do ArticlesScreen.
-			articlesScreen
-				.toolbar{
-
-					ToolbarItem {
-						Button {
-							shouldOpenSources = true
-						} label: {
-							Label("Sources", systemImage: "list.bullet.rectangle")
-								.labelStyle(.titleAndIcon)
-						}
-						.popover(isPresented: $shouldOpenSources) {
-							SourcesScreen(viewModel: .init())
-						}
-					}
-
-					ToolbarItem{
-						Button{
-							shouldOpenAbout = true
-						}label: {
-							Label("About", systemImage: "info.circle").labelStyle(.titleAndIcon)
-						}
-						.popover(isPresented: $shouldOpenAbout){
-							AboutScreen()
-						}
-					}
-				}
-        }.refreshable {
-            articlesScreen.viewModel.articlesViewModel.getArticles(forceFetch: true)
-        }
-	}
+    var body: some View {
+        ComposeView().ignoresSafeArea(.keyboard)
+    }
+    
+    
 }
 
-struct ContentView_Previews: PreviewProvider {
-	static var previews: some View {
-		ContentView()
-	}
+struct ComposeView: UIViewControllerRepresentable {
+    
+    // O tipo associado (opcional declarar, mas ajuda o compilador)
+        typealias UIViewControllerType = UIViewController
+    
+    func makeUIViewController(context: Context) -> UIViewControllerType {
+        MainIOSKt.MainViewController()
+    }
+    
+    func updateUIViewController(_ uiViewController: UIViewControllerType, context: Context) {
+        
+    }
+    
+    
 }

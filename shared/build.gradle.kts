@@ -6,7 +6,6 @@ plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidLibrary)
     id("org.jetbrains.kotlin.native.cocoapods")
-    id("co.touchlab.skie") version "0.10.5" //plugin para o skie - fazer o ios integrar com o viewmodel do android
     id("org.jetbrains.kotlin.plugin.serialization") version "2.2.0"
     id("org.jetbrains.kotlin.plugin.compose") version "2.2.0"
     alias(libs.plugins.sqlDelight)
