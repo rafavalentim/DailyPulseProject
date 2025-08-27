@@ -59,21 +59,29 @@ kotlin {
 
     sourceSets {
         commonMain.dependencies {
-            implementation(libs.kotlinx.coroutines.core)
+
+
+            //ktor
             implementation(libs.ktor.client.core)
             implementation(libs.ktor.client.content.negotiation)
             implementation(libs.ktor.serialization.kotlinx.json)
+
+            //coroutines
             implementation(libs.kotlinx.datetime)
-            implementation(libs.koin.core)
             implementation(libs.sql.coroutines.extensions)
+            implementation(libs.kotlinx.coroutines.core)
+
+            //koin
+            implementation(libs.koin.core)
+            implementation(libs.koin.compose)
 
 
+            //Compose multiplatform
             implementation(compose.foundation)
             implementation(compose.material3)
             implementation(compose.material)
             implementation(compose.runtime)
             implementation(compose.components.resources)
-
             implementation(compose.materialIconsExtended)
 
 
