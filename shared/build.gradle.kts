@@ -84,6 +84,9 @@ kotlin {
             implementation(compose.components.resources)
             implementation(compose.materialIconsExtended)
 
+            //Kamel (Questões de AsyncImages)
+            implementation(libs.kamel.image)
+
 
 
         }
