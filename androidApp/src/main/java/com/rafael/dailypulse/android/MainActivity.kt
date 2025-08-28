@@ -8,6 +8,7 @@ import androidx.compose.material3.*
 import androidx.compose.ui.Modifier
 import com.rafael.dailypulse.Platform
 import com.rafael.dailypulse.ui.App
+import com.rafael.dailypulse.ui.MyApplicationTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,12 +29,3 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
-
-
-//@Preview
-//@Composable
-//fun DefaultPreview() {
-//    MyApplicationTheme {
-//        AboutScreen()
-//    }
-//}
