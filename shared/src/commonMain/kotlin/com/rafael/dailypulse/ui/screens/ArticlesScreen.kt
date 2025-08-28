@@ -26,25 +26,34 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.DefaultAlpha
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import cafe.adriel.voyager.core.screen.Screen
+import cafe.adriel.voyager.navigator.LocalNavigator
+import cafe.adriel.voyager.navigator.currentOrThrow
 import com.rafael.dailypulse.articles.application.Article
 import com.rafael.dailypulse.articles.presentation.ArticlesViewModel
 import com.rafael.dailypulse.ui.screens.elements.ErrorMessage
 import io.kamel.image.KamelImage
 import io.kamel.image.asyncPainterResource
-import io.ktor.http.Url
 import org.koin.compose.koinInject
 
 
+class ArticlesScreen() : Screen {
+    @Composable
+    override fun Content() {
+        ArticlesScreenContent()
+    }
+}
+
+
 @Composable
-fun ArticlesScreen(
+fun ArticlesScreenContent(
     articlesViewModel: ArticlesViewModel = koinInject(), // nas novas versões usa-se o koinViewModel.
-) {
+){
     val articlesState = articlesViewModel.articlesState.collectAsState()
 
     Column {
@@ -57,21 +66,32 @@ fun ArticlesScreen(
     }
 }
 
+
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun AppBar() {
+
+    //Implementando a navegação entre telas com o Voyager
+    val navigator = LocalNavigator.currentOrThrow
+
     TopAppBar(
         title = { Text(text = "Articles") },
         actions = {
 
-            IconButton(onClick = { }) {
+            IconButton(onClick = {
+                //Para funcionar a classe SourceScreen deve implementar a :Screen interface.
+                navigator.push(SourcesScreen())
+            }) {
                 Icon(
                     imageVector = Icons.Outlined.List,
                     contentDescription = "Sources Button",
                 )
             }
 
-            IconButton(onClick = { }) {
+            IconButton(onClick = {
+                navigator.push(AboutScreen())
+            }) {
                 Icon(
                     imageVector = Icons.Outlined.Info,
                     contentDescription = "About Device Button"

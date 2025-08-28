@@ -7,7 +7,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.*
 import androidx.compose.ui.Modifier
 import com.rafael.dailypulse.Platform
-import com.rafael.dailypulse.ui.screens.ArticlesScreen
+import com.rafael.dailypulse.ui.App
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -22,12 +22,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    //AboutScreen()
-                    //ArticlesScreen(articlesViewModel = articlesViewModel)
-                    //AppScaffold()
-                    //AboutScreen()
-                    //SourcesScreen()
-                    ArticlesScreen()
+                    App()
                 }
             }
         }

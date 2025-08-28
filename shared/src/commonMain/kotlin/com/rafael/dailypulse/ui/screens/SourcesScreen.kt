@@ -24,16 +24,25 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.foundation.lazy.items
 import androidx.compose.ui.unit.sp
+import cafe.adriel.voyager.core.screen.Screen
+import cafe.adriel.voyager.navigator.LocalNavigator
+import cafe.adriel.voyager.navigator.currentOrThrow
 import com.rafael.dailypulse.sources.application.Source
 import com.rafael.dailypulse.sources.presentation.SourcesViewModel
 import com.rafael.dailypulse.ui.screens.elements.ErrorMessage
 import org.koin.compose.koinInject
 
 
+
+class SourcesScreen() : Screen {
+    @Composable
+    override fun Content() {
+       SourceScreenContent()
+    }
+}
+
 @Composable
-fun SourcesScreen(
-    viewModel: SourcesViewModel = koinInject(),
-) {
+fun SourceScreenContent(viewModel: SourcesViewModel = koinInject(),){
     val sourcesState = viewModel.sourcesState.collectAsState()
 
     Column {
@@ -44,15 +53,23 @@ fun SourcesScreen(
 
         SourcesListView(viewModel)
     }
+
 }
+
+
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun AppBar() {
+
+    val navigator = LocalNavigator.currentOrThrow
+
     TopAppBar(
         title = { Text(text = "Sources") },
         navigationIcon = {
-            IconButton(onClick = { }) {
+            IconButton(onClick = {
+                navigator.pop()
+            }) {
                 Icon(
                     imageVector = Icons.Default.ArrowBack,
                     contentDescription = "Up Button",

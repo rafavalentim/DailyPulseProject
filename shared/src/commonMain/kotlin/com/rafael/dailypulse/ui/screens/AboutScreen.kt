@@ -18,11 +18,23 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import cafe.adriel.voyager.core.screen.Screen
+import cafe.adriel.voyager.navigator.LocalNavigator
+import cafe.adriel.voyager.navigator.currentOrThrow
 import com.rafael.dailypulse.Platform
 
 
+
+class AboutScreen() : Screen {
+    @Composable
+    override fun Content() {
+        AboutScreenContent()
+    }
+}
+
+
 @Composable
-fun AboutScreen() {
+fun AboutScreenContent(){
     Column {
         Toolbar()
         ContentView()
@@ -31,12 +43,16 @@ fun AboutScreen() {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-private fun Toolbar(
-){
+private fun Toolbar(){
+
+    val navigator = LocalNavigator.currentOrThrow
+
     TopAppBar(
         title = { Text(text = "About Device") },
         navigationIcon = {
-            IconButton({}) {
+            IconButton({
+                navigator.pop()
+            }) {
                 Icon(
                     imageVector = Icons.AutoMirrored.Filled.ArrowBack,
                     contentDescription = "Up Button"

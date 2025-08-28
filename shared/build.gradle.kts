@@ -88,6 +88,9 @@ kotlin {
             implementation(libs.kamel.image)
             implementation(libs.kamel.image.default)
 
+            //Voyager (Navegação entre telas)
+            implementation(libs.voyager.navigator)
+
 
 
         }
