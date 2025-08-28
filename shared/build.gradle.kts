@@ -90,6 +90,7 @@ kotlin {
 
             //Voyager (Navegação entre telas)
             implementation(libs.voyager.navigator)
+            implementation(libs.voyager.transitions)
 
 
 
