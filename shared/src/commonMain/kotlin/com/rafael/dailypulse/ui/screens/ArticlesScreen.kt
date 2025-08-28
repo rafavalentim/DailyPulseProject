@@ -114,13 +114,23 @@ fun ArticleItemView(article: Article) {
             .fillMaxWidth()
             .padding(16.dp)
     ) {
-        KamelImage({ asyncPainterResource(data = Url(article.imageUrl)) },
+        KamelImage({ asyncPainterResource(article.imageUrl) },
             contentDescription = "article image",
-            modifier = Modifier.height(200.dp),
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(200.dp),
             alignment = Alignment.Center,
             contentScale = ContentScale.Crop,
-            alpha = DefaultAlpha,
-            contentAlignment = Alignment.Center
+            contentAlignment = Alignment.Center,
+            onLoading = {
+                // Opcional: mostre um placeholder enquanto baixa
+                Text("Carregando imagem…")
+            },
+            onFailure = { error ->
+                // Muito útil para depurar
+                Text("Falha ao carregar imagem")
+                println("Kamel error: ${error.message}")
+            }
         )
         Spacer(modifier = Modifier.height(4.dp))
         Text(

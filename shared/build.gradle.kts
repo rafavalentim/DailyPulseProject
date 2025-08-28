@@ -18,7 +18,7 @@ kotlin {
         compilations.all {
             compileTaskProvider.configure {
                 compilerOptions {
-                    jvmTarget.set(JvmTarget.JVM_1_8)
+                    jvmTarget.set(JvmTarget.JVM_11)
                 }
             }
         }
@@ -86,6 +86,7 @@ kotlin {
 
             //Kamel (Questões de AsyncImages)
             implementation(libs.kamel.image)
+            implementation(libs.kamel.image.default)
 
 
 
