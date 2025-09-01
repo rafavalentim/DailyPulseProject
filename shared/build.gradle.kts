@@ -35,6 +35,8 @@ kotlin {
         }
     }
 
+    jvm("desktop")
+
     // aplica o -lsqlite3 a todos os binários nativos (inclui iOS)
     targets.withType<KotlinNativeTarget>().configureEach {
         binaries.all {
@@ -110,6 +112,14 @@ kotlin {
         iosMain.dependencies {
             implementation(libs.ktor.client.darwin)
             implementation(libs.sql.native.driver)
+        }
+
+        val desktopMain by getting{
+            dependencies {
+                implementation(libs.ktor.client.cio)
+                implementation(libs.sql.desktop.driver)
+            }
+
         }
 
 
