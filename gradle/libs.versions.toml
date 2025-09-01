@@ -1,5 +1,5 @@
 [versions]
-agp = "8.12.1"
+agp = "8.12.2"
 kotlin = "2.2.0"
 compose = "1.9.0"
 compose-material3 = "1.3.2"
@@ -15,6 +15,12 @@ composeMpp = "1.8.2"
 koinCompose = "4.1.0"
 kamelImage = "1.0.7"
 voyagerVersion = "1.1.0-beta03"
+coreKtx = "1.10.1"
+junit = "4.13.2"
+junitVersion = "1.1.5"
+espressoCore = "3.5.1"
+appcompat = "1.6.1"
+material = "1.10.0"
 
 [libraries]
 kamel-image-default = { module = "media.kamel:kamel-image-default", version.ref = "kamelImage" }
@@ -50,6 +56,12 @@ kamel-image = { module = "media.kamel:kamel-image", version.ref = "kamelImage" }
 
 voyager-navigator = { module = "cafe.adriel.voyager:voyager-navigator", version.ref = "voyagerVersion" }
 voyager-transitions = { module = "cafe.adriel.voyager:voyager-transitions", version.ref = "voyagerVersion" }
+androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+junit = { group = "junit", name = "junit", version.ref = "junit" }
+androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
+androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
+androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
+material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 
 
 

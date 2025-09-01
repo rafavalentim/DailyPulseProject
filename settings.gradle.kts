@@ -22,3 +22,5 @@ dependencyResolutionManagement {
 rootProject.name = "DailyPulseNotices"
 include(":androidApp")
 include(":shared")
+include(":desktopMain")
+include(":desktop")
