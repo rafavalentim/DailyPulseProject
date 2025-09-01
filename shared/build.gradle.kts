@@ -119,9 +119,7 @@ kotlin {
                 implementation(libs.ktor.client.cio)
                 implementation(libs.sql.desktop.driver)
             }
-
         }
-
 
     }
 }
