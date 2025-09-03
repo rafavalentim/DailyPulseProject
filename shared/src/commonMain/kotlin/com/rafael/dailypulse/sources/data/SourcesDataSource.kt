@@ -2,13 +2,13 @@ package com.rafael.dailypulse.sources.data
 
 import com.rafael.dailypulse.db.DailyPulseDatabase
 
-class SourcesDataSource(private val db: DailyPulseDatabase) {
+class SourcesDataSource(private val db: DailyPulseDatabase?) {
 
     fun getAllSources(): List<SourceRaw> =
-        db.dailyPulseDatabaseQueries.selectAllSources(::mapSource).executeAsList()
+        db?.dailyPulseDatabaseQueries?.selectAllSources(::mapSource)?.executeAsList() ?: listOf()
 
     fun clearSources() =
-        db.dailyPulseDatabaseQueries.removeAllSources()
+        db?.dailyPulseDatabaseQueries?.removeAllSources()
 
     private fun mapSource(
         id: String,
@@ -27,7 +27,7 @@ class SourcesDataSource(private val db: DailyPulseDatabase) {
     }
 
     internal fun createSources(sources: List<SourceRaw>) {
-        db.dailyPulseDatabaseQueries.transaction {
+        db?.dailyPulseDatabaseQueries?.transaction {
             sources.forEach { source ->
                 insertSource(source)
             }
@@ -35,7 +35,7 @@ class SourcesDataSource(private val db: DailyPulseDatabase) {
     }
 
     private fun insertSource(source: SourceRaw) {
-        db.dailyPulseDatabaseQueries.insertSource(
+        db?.dailyPulseDatabaseQueries?.insertSource(
             source.id,
             source.name,
             source.desc,

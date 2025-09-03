@@ -2,23 +2,23 @@ package com.rafael.dailypulse.articles.data
 
 import com.rafael.dailypulse.db.DailyPulseDatabase
 
-class ArticlesDataSource(private val database: DailyPulseDatabase) {
+class ArticlesDataSource(private val database: DailyPulseDatabase?) {
 
-    fun getAllArticles(): List<ArticlesRaw> = database.dailyPulseDatabaseQueries.selectAllArticles(:: mapToArticleRaw).executeAsList()
+    fun getAllArticles(): List<ArticlesRaw> = database?.dailyPulseDatabaseQueries?.selectAllArticles(:: mapToArticleRaw)?.executeAsList() ?: listOf()
 
     fun insertArticles(articles : List<ArticlesRaw>) {
-        database.dailyPulseDatabaseQueries.transaction{
+        database?.dailyPulseDatabaseQueries?.transaction{
             articles.forEach { articlesRaw ->
                 insertArticle(articlesRaw)
             }
         }
     }
 
-    fun clearArticles() = database.dailyPulseDatabaseQueries.removeAllArticles()
+    fun clearArticles() = database?.dailyPulseDatabaseQueries?.removeAllArticles()
 
 
     private fun insertArticle(articlesRaw: ArticlesRaw){
-        database.dailyPulseDatabaseQueries.insertArticle(
+        database?.dailyPulseDatabaseQueries?.insertArticle(
             articlesRaw.title,
             articlesRaw.desc,
             articlesRaw.date,

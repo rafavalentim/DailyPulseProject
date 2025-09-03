@@ -37,6 +37,11 @@ kotlin {
 
     jvm("desktop")
 
+    js(IR){
+        binaries.executable()
+        browser()
+    }
+
     // aplica o -lsqlite3 a todos os binários nativos (inclui iOS)
     targets.withType<KotlinNativeTarget>().configureEach {
         binaries.all {
@@ -121,6 +126,13 @@ kotlin {
             }
         }
 
+        val jsMain by getting{
+            dependencies{
+                implementation(libs.ktor.client.js)
+
+            }
+        }
+
     }
 }
 
@@ -143,3 +155,7 @@ sqldelight {
         }
     }
 }
+
+//compose.experimental{
+//    web.application{}
+//}
