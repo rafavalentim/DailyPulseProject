@@ -31,18 +31,20 @@ import com.rafael.dailypulse.sources.application.Source
 import com.rafael.dailypulse.sources.presentation.SourcesViewModel
 import com.rafael.dailypulse.ui.screens.elements.ErrorMessage
 import org.koin.compose.koinInject
+import org.koin.core.Koin
 
 
-
-class SourcesScreen() : Screen {
+class SourcesScreen(val koin: Koin) : Screen {
     @Composable
     override fun Content() {
-       SourceScreenContent()
+       SourceScreenContent(koin)
     }
 }
 
 @Composable
-fun SourceScreenContent(viewModel: SourcesViewModel = koinInject(),){
+fun SourceScreenContent(
+    koin: Koin,
+    viewModel: SourcesViewModel = koin.get()){   //koinInject()
     val sourcesState = viewModel.sourcesState.collectAsState()
 
     Column {

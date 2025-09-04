@@ -40,24 +40,26 @@ import com.rafael.dailypulse.ui.screens.elements.ErrorMessage
 import io.kamel.image.KamelImage
 import io.kamel.image.asyncPainterResource
 import org.koin.compose.koinInject
+import org.koin.core.Koin
 
 
-class ArticlesScreen() : Screen {
+class ArticlesScreen(val koin: Koin) : Screen {
     @Composable
     override fun Content() {
-        ArticlesScreenContent()
+        ArticlesScreenContent(koin)
     }
 }
 
 
 @Composable
 fun ArticlesScreenContent(
-    articlesViewModel: ArticlesViewModel = koinInject(), // nas novas versões usa-se o koinViewModel.
+    koin: Koin,
+    articlesViewModel: ArticlesViewModel = koin.get()    //koinInject(), // nas novas versões usa-se o koinViewModel.
 ){
     val articlesState = articlesViewModel.articlesState.collectAsState()
 
     Column {
-        AppBar()
+        AppBar(koin)
 
         if (articlesState.value.error != null)
             ErrorMessage(articlesState.value.error!!)
@@ -70,7 +72,7 @@ fun ArticlesScreenContent(
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-private fun AppBar() {
+private fun AppBar(koin: Koin) {
 
     //Implementando a navegação entre telas com o Voyager
     val navigator = LocalNavigator.currentOrThrow
@@ -81,7 +83,7 @@ private fun AppBar() {
 
             IconButton(onClick = {
                 //Para funcionar a classe SourceScreen deve implementar a :Screen interface.
-                navigator.push(SourcesScreen())
+                navigator.push(SourcesScreen(koin))
             }) {
                 Icon(
                     imageVector = Icons.Outlined.List,
